@@ -16,7 +16,8 @@ public class NavigationTabTests
     [Theory]
     [InlineData(NavigationTab.GameProfiles, 0)]
     [InlineData(NavigationTab.Downloads, 1)]
-    [InlineData(NavigationTab.Settings, 2)]
+    [InlineData(NavigationTab.Tools, 2)]
+    [InlineData(NavigationTab.Settings, 3)]
     public void NavigationTab_HasExpectedValues(NavigationTab tab, int expectedValue)
     {
         Assert.Equal(expectedValue, (int)tab);
@@ -29,9 +30,10 @@ public class NavigationTabTests
     public void NavigationTab_AllValuesAreDefined()
     {
         var values = Enum.GetValues<NavigationTab>();
-        Assert.Equal(3, values.Length);
+        Assert.Equal(4, values.Length);
         Assert.Contains(NavigationTab.GameProfiles, values);
         Assert.Contains(NavigationTab.Downloads, values);
+        Assert.Contains(NavigationTab.Tools, values);
         Assert.Contains(NavigationTab.Settings, values);
     }
 }

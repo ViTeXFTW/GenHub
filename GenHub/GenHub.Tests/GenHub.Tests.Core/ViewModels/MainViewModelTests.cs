@@ -5,6 +5,7 @@ using GenHub.Core.Models.Enums;
 using GenHub.Features.Downloads.ViewModels;
 using GenHub.Features.GameProfiles.ViewModels;
 using GenHub.Features.Settings.ViewModels;
+using GenHub.Features.Tools.ViewModels;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using Xunit;
@@ -29,6 +30,7 @@ public class MainViewModelTests
         var vm = new MainViewModel(
             new GameProfileLauncherViewModel(),
             new DownloadsViewModel(),
+            new ToolsViewModel(),
             new SettingsViewModel(),
             mockOrchestrator.Object,
             logger);
@@ -45,6 +47,7 @@ public class MainViewModelTests
     [Theory]
     [InlineData(NavigationTab.GameProfiles)]
     [InlineData(NavigationTab.Downloads)]
+    [InlineData(NavigationTab.Tools)]
     [InlineData(NavigationTab.Settings)]
     public void SelectTabCommand_SetsSelectedTab(NavigationTab tab)
     {
@@ -53,6 +56,7 @@ public class MainViewModelTests
         var vm = new MainViewModel(
             new GameProfileLauncherViewModel(),
             new DownloadsViewModel(),
+            new ToolsViewModel(),
             new SettingsViewModel(),
             mockOrchestrator.Object,
             logger);
@@ -73,6 +77,7 @@ public class MainViewModelTests
         var viewModel = new MainViewModel(
             new GameProfileLauncherViewModel(),
             new DownloadsViewModel(),
+            new ToolsViewModel(),
             new SettingsViewModel(),
             mockOrchestrator.Object,
             logger);
@@ -95,6 +100,7 @@ public class MainViewModelTests
         var vm = new MainViewModel(
             new GameProfileLauncherViewModel(),
             new DownloadsViewModel(),
+            new ToolsViewModel(),
             new SettingsViewModel(),
             mockOrchestrator.Object,
             logger);
@@ -112,6 +118,7 @@ public class MainViewModelTests
     [Theory]
     [InlineData(NavigationTab.GameProfiles)]
     [InlineData(NavigationTab.Downloads)]
+    [InlineData(NavigationTab.Tools)]
     [InlineData(NavigationTab.Settings)]
     public void CurrentTabViewModel_ReturnsCorrectViewModel(NavigationTab tab)
     {
@@ -120,6 +127,7 @@ public class MainViewModelTests
         var vm = new MainViewModel(
             new GameProfileLauncherViewModel(),
             new DownloadsViewModel(),
+            new ToolsViewModel(),
             new SettingsViewModel(),
             mockOrchestrator.Object,
             logger);
@@ -136,6 +144,9 @@ public class MainViewModelTests
                 break;
             case NavigationTab.Downloads:
                 Assert.IsType<DownloadsViewModel>(currentViewModel);
+                break;
+            case NavigationTab.Tools:
+                Assert.IsType<ToolsViewModel>(currentViewModel);
                 break;
             case NavigationTab.Settings:
                 Assert.IsType<SettingsViewModel>(currentViewModel);
