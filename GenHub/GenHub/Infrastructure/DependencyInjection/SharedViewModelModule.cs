@@ -3,6 +3,7 @@ using GenHub.Core;
 using GenHub.Features.Downloads.ViewModels;
 using GenHub.Features.GameProfiles.ViewModels;
 using GenHub.Features.Settings.ViewModels;
+using GenHub.Features.Tools.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GenHub.Infrastructure.DependencyInjection;
@@ -25,6 +26,7 @@ public static class SharedViewModelModule
         // Register tab ViewModels
         services.AddSingleton<GameProfileLauncherViewModel>();
         services.AddSingleton<DownloadsViewModel>();
+        services.AddSingleton<ToolsViewModel>();
         services.AddSingleton<SettingsViewModel>();
         services.AddSingleton<GameProfileSettingsViewModel>();
         services.AddSingleton<GameProfileItemViewModel>();

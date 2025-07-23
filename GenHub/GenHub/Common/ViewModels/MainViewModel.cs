@@ -8,6 +8,7 @@ using GenHub.Features.AppUpdate.Views;
 using GenHub.Features.Downloads.ViewModels;
 using GenHub.Features.GameProfiles.ViewModels;
 using GenHub.Features.Settings.ViewModels;
+using GenHub.Features.Tools.ViewModels;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace GenHub.Common.ViewModels;
 public partial class MainViewModel(
     GameProfileLauncherViewModel gameProfilesViewModel,
     DownloadsViewModel downloadsViewModel,
+    ToolsViewModel toolsViewModel,
     SettingsViewModel settingsViewModel,
     IGameInstallationDetectionOrchestrator gameInstallationDetectionOrchestrator,
     ILogger<MainViewModel>? logger = null
@@ -47,6 +49,11 @@ public partial class MainViewModel(
     public DownloadsViewModel DownloadsViewModel => downloadsViewModel;
 
     /// <summary>
+    /// Gets the Tools tab ViewModel.
+    /// </summary>
+    public ToolsViewModel ToolsViewModel => toolsViewModel;
+
+    /// <summary>
     /// Gets the Settings tab ViewModel.
     /// </summary>
     public SettingsViewModel SettingsViewModel => settingsViewModel;
@@ -63,6 +70,7 @@ public partial class MainViewModel(
     {
         NavigationTab.GameProfiles,
         NavigationTab.Downloads,
+        NavigationTab.Tools,
         NavigationTab.Settings,
     };
 
@@ -73,6 +81,7 @@ public partial class MainViewModel(
     {
         NavigationTab.GameProfiles => GameProfilesViewModel,
         NavigationTab.Downloads => DownloadsViewModel,
+        NavigationTab.Tools => ToolsViewModel,
         NavigationTab.Settings => SettingsViewModel,
         _ => GameProfilesViewModel
     };
@@ -86,6 +95,7 @@ public partial class MainViewModel(
     {
         NavigationTab.GameProfiles => "Game Profiles",
         NavigationTab.Downloads => "Downloads",
+        NavigationTab.Tools => "Tools",
         NavigationTab.Settings => "Settings",
         _ => tab.ToString(),
     };
@@ -98,6 +108,7 @@ public partial class MainViewModel(
     {
         await GameProfilesViewModel.InitializeAsync();
         await DownloadsViewModel.InitializeAsync();
+        await ToolsViewModel.InitializeAsync();
         await SettingsViewModel.InitializeAsync();
         _logger?.LogInformation("MainViewModel initialized");
         await Task.CompletedTask;

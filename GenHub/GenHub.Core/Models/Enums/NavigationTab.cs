@@ -16,7 +16,12 @@ public enum NavigationTab
     Downloads = 1,
 
     /// <summary>
+    /// Tools and utilities for game management.
+    /// </summary>
+    Tools = 2,
+
+    /// <summary>
     /// Application settings and configuration.
     /// </summary>
-    Settings = 2,
+    Settings = 3,
 }

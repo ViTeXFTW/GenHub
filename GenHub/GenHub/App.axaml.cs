@@ -8,6 +8,7 @@ using GenHub.Features.Downloads.ViewModels;
 using GenHub.Features.GameInstallations;
 using GenHub.Features.GameProfiles.ViewModels;
 using GenHub.Features.Settings.ViewModels;
+using GenHub.Features.Tools.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -36,6 +37,7 @@ public partial class App : Application
                 // Create default ViewModels if DI is not configured
                 var gameProfilesVM = AppLocator.Services?.GetService<GameProfileLauncherViewModel>() ?? new GameProfileLauncherViewModel();
                 var downloadsVM = AppLocator.Services?.GetService<DownloadsViewModel>() ?? new DownloadsViewModel();
+                var toolsVM = AppLocator.Services?.GetService<ToolsViewModel>() ?? new ToolsViewModel();
                 var settingsVM = AppLocator.Services?.GetService<SettingsViewModel>() ?? new SettingsViewModel();
 
                 // Resolve game installation orchestrator
@@ -48,7 +50,7 @@ public partial class App : Application
                         Array.Empty<IGameInstallationDetector>(),
                         orchestratorLogger);
 
-                viewModel = new MainViewModel(gameProfilesVM, downloadsVM, settingsVM, orchestrator, mainViewModelLogger);
+                viewModel = new MainViewModel(gameProfilesVM, downloadsVM, toolsVM, settingsVM, orchestrator, mainViewModelLogger);
             }
 
             desktop.MainWindow = new MainWindow()
